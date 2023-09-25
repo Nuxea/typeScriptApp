@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import Cards from "@/components/Cards.vue";
 
 enum GENDER {
   MALE, FEMALE
@@ -41,6 +42,9 @@ const addInvitee = (): void => {
           <option :value="GENDER.MALE">Male</option>
           <option :value="GENDER.FEMALE">Female</option>
         </select>
+      </div>
+      <div class="cards-container">
+        <Cards v-for="invitee in invitees" :key="invitee.id" :invitee="invitee" />
       </div>
     </div>
   </main>
