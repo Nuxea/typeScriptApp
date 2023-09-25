@@ -5,8 +5,30 @@ enum GENDER {
   MALE, FEMALE
 }
 
+interface INVITEE {
+  id: number
+  name: string
+  gender: GENDER
+}
+
 const name = ref('')
 const gender = ref(GENDER.MALE)
+
+const invitees = ref<INVITEE[]>([])
+
+const addInvitee = (): void => {
+  if (name.value) {
+    invitees.value.push({
+      id: Math.floor(Math.random() * 10000000),
+      name: name.value,
+      gender: gender.value
+    });
+    name.value = ''
+    gender.value = GENDER.MALE
+  }
+
+
+}
 </script>
 
 <template>
@@ -14,8 +36,8 @@ const gender = ref(GENDER.MALE)
     <div class="container">
       <h1>People invited to my party</h1>
       <div class="input-container">
-        <input v-model="name" type="text" placeholder="Name...">
-        <select v-model="gender">
+        <input @keydown.enter="addInvitee" v-model="name" type="text" placeholder="Name...">
+        <select @keydown.enter="addInvitee" v-model="gender">
           <option :value="GENDER.MALE">Male</option>
           <option :value="GENDER.FEMALE">Female</option>
         </select>
