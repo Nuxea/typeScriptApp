@@ -1,21 +1,12 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import { computed, ref } from "vue";
 import Cards from "@/components/Cards.vue";
-
-enum GENDER {
-  MALE, FEMALE
-}
-
-interface INVITEE {
-  id: number
-  name: string
-  gender: GENDER
-}
+import { GENDER, type Invitee } from "@/types";
 
 const name = ref('')
 const gender = ref(GENDER.MALE)
 
-const invitees = ref<INVITEE[]>([])
+const invitees = ref<Invitee[]>([])
 
 const addInvitee = (): void => {
   if (name.value) {
